@@ -1,0 +1,2134 @@
+bounded
+
+import java.util.*;
+class GenNumber<T extends Number>{
+	T[] vals;
+	GenNumber(T[] obj){
+		this.vals=obj;
+	}
+	double average(){
+		int len=vals.length;
+		double sum=0.0;
+		for(T ele:vals)
+			sum+=ele.doubleValue();
+		return sum/len;
+	}
+	boolean isAvgSame(GenNumber<?> obj){
+		if(this.average()==obj.average())
+			return true;
+		else
+			return false;
+	}
+}
+public class Bounded{
+	public static void main(String[] args){
+		Integer[] i={1,2,3,4,5,6};
+		GenNumber<Integer> a1=new GenNumber<>(i);
+		Double[] d={1.0,2.0,3.0,4.0,5.0,6.0};
+		GenNumber<Double> a2=new GenNumber<>(d);
+		System.out.println("Average of a1: "+a1.average());
+		System.out.println("Average of a2: "+a2.average());
+		if(a1.isAvgSame(a2))
+			System.out.println("Average is same");
+		else
+			System.out.println("Average is not same");
+	}
+}
+
+
+pi
+
+import java.util.function.Supplier;
+
+public class PiValue {
+    public static void main(String[] args) {
+       
+        Supplier<Double> piSupplier = () -> Math.PI;
+        double piValue = piSupplier.get();
+        System.out.println("The value of pi is: " + piValue);
+    }
+}
+
+reverse of string
+
+import java.util.function.Function;
+
+public class ReverseString {
+    public static void main(String[] args) {
+        
+        Function<String, String> reverseString = (str) -> new StringBuilder(str).reverse().toString();
+
+    
+        String input = "Hello, World!";
+        String reversed = reverseString.apply(input);
+
+    
+        System.out.println("Original string: " + input);
+        System.out.println("Reversed string: " + reversed);
+    }
+}
+
+
+iterator on array list and linked list
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+public class IteratorExample {
+    public static void main(String[] args) {
+      
+        List<String> arrayList = new ArrayList<>();
+        arrayList.add("Apple");
+        arrayList.add("Banana");
+        arrayList.add("Cherry");
+
+        
+        List<String> linkedList = new LinkedList<>();
+        linkedList.add("Dog");
+        linkedList.add("Elephant");
+        linkedList.add("Frog");
+
+        
+        System.out.println("Iterating over ArrayList:");
+        Iterator<String> arrayListIterator = arrayList.iterator();
+        while (arrayListIterator.hasNext()) {
+            String element = arrayListIterator.next();
+            System.out.println(element);
+        }
+
+       
+        System.out.println("\nIterating over LinkedList:");
+        Iterator<String> linkedListIterator = linkedList.iterator();
+        while (linkedListIterator.hasNext()) {
+            String element = linkedListIterator.next();
+            System.out.println(element);
+        }
+    }
+}
+
+
+stack interger using array
+
+
+class ArrayStack<T> {
+    private T[] stack;
+    private int top;
+    private int capacity;
+
+  
+    public ArrayStack(int size) {
+        stack = (T[]) new Object[size];
+        capacity = size;
+        top = -1;
+    }
+
+   
+    public void push(T item) {
+        if (top == capacity - 1) {
+            System.out.println("Stack Overflow");
+            return;
+        }
+        stack[++top] = item;
+    }
+
+    public T pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow");
+            return null;
+        }
+        return stack[top--];
+    }
+
+   
+    public T peek() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+            return null;
+        }
+        return stack[top];
+    }
+
+  
+    public boolean isEmpty() {
+        return top == -1;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+       
+        ArrayStack<Integer> intStack = new ArrayStack<>(5);
+        intStack.push(1);
+        intStack.push(2);
+        intStack.push(3);
+        System.out.println("Popped from intStack: " + intStack.pop());
+
+        ArrayStack<Double> doubleStack = new ArrayStack<>(5);
+        doubleStack.push(1.1);
+        doubleStack.push(2.2);
+        doubleStack.push(3.3);
+        System.out.println("Popped from doubleStack: " + doubleStack.pop());
+
+      
+        ArrayStack<String> stringStack = new ArrayStack<>(5);
+        stringStack.push("Hello");
+        stringStack.push("World");
+        stringStack.push("!");
+        System.out.println("Popped from stringStack: " + stringStack.pop());
+    }
+}
+
+
+stack integer using linked list
+
+
+class Node<T> {
+    T data;
+    Node<T> next;
+
+    Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+
+class LinkedListStack<T> {
+    private Node<T> top;
+
+  
+    public LinkedListStack() {
+        top = null;
+    }
+
+ 
+    public void push(T item) {
+        Node<T> newNode = new Node<>(item);
+        newNode.next = top;
+        top = newNode;
+    }
+
+
+    public T pop() {
+        if (top == null) {
+            System.out.println("Stack Underflow");
+            return null;
+        }
+        T item = top.data;
+        top = top.next;
+        return item;
+    }
+
+   
+    public T peek() {
+        if (top == null) {
+            System.out.println("Stack is empty");
+            return null;
+        }
+        return top.data;
+    }
+
+   
+    public boolean isEmpty() {
+        return top == null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+      
+        LinkedListStack<Integer> intStack = new LinkedListStack<>();
+        intStack.push(1);
+        intStack.push(2);
+        intStack.push(3);
+        System.out.println("Popped from intStack: " + intStack.pop());
+
+      
+        LinkedListStack<Double> doubleStack = new LinkedListStack<>();
+        doubleStack.push(1.1);
+        doubleStack.push(2.2);
+        doubleStack.push(3.3);
+        System.out.println("Popped from doubleStack: " + doubleStack.pop());
+
+    
+        LinkedListStack<String> stringStack = new LinkedListStack<>();
+        stringStack.push("Hello");
+        stringStack.push("World");
+        stringStack.push("!");
+        System.out.println("Popped from stringStack: " + stringStack.pop());
+    }
+}
+
+
+queue integer array
+
+
+class ArrayQueue<T> {
+    private T[] queue;
+    private int front;
+    private int rear;
+    private int capacity;
+    private int size;
+
+    
+    public ArrayQueue(int size) {
+        queue = (T[]) new Object[size];
+        capacity = size;
+        front = 0;
+        rear = -1;
+        this.size = 0;
+    }
+
+    public void enqueue(T item) {
+        if (size == capacity) {
+            System.out.println("Queue Overflow");
+            return;
+        }
+        rear = (rear + 1) % capacity;
+        queue[rear] = item;
+        size++;
+    }
+
+  
+    public T dequeue() {
+        if (size == 0) {
+            System.out.println("Queue Underflow");
+            return null;
+        }
+        T item = queue[front];
+        front = (front + 1) % capacity;
+        size--;
+        return item;
+    }
+
+  
+    public T peek() {
+        if (size == 0) {
+            System.out.println("Queue is empty");
+            return null;
+        }
+        return queue[front];
+    }
+
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+       
+        ArrayQueue<Integer> intQueue = new ArrayQueue<>(5);
+        intQueue.enqueue(1);
+        intQueue.enqueue(2);
+        intQueue.enqueue(3);
+        System.out.println("Dequeued from intQueue: " + intQueue.dequeue());
+
+       
+        ArrayQueue<Double> doubleQueue = new ArrayQueue<>(5);
+        doubleQueue.enqueue(1.1);
+        doubleQueue.enqueue(2.2);
+        doubleQueue.enqueue(3.3);
+        System.out.println("Dequeued from doubleQueue: " + doubleQueue.dequeue());
+
+      
+        ArrayQueue<String> stringQueue = new ArrayQueue<>(5);
+        stringQueue.enqueue("Hello");
+        stringQueue.enqueue("World");
+        stringQueue.enqueue("!");
+        System.out.println("Dequeued from stringQueue: " + stringQueue.dequeue());
+    }
+}
+
+
+queue using integer linked list
+
+
+class Node<T> {
+    T data;
+    Node<T> next;
+
+    Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+
+class LinkedListQueue<T> {
+    private Node<T> front;
+    private Node<T> rear;
+
+
+    public LinkedListQueue() {
+        front = null;
+        rear = null;
+    }
+
+   
+    public void enqueue(T item) {
+        Node<T> newNode = new Node<>(item);
+        if (rear == null) {
+            front = rear = newNode;
+        } else {
+            rear.next = newNode;
+            rear = newNode;
+        }
+    }
+
+   
+    public T dequeue() {
+        if (front == null) {
+            System.out.println("Queue Underflow");
+            return null;
+        }
+        T item = front.data;
+        front = front.next;
+        if (front == null) {
+            rear = null;
+        }
+        return item;
+    }
+
+   
+    public T peek() {
+        if (front == null) {
+            System.out.println("Queue is empty");
+            return null;
+        }
+        return front.data;
+    }
+
+
+    public boolean isEmpty() {
+        return front == null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+   
+        LinkedListQueue<Integer> intQueue = new LinkedListQueue<>();
+        intQueue.enqueue(1);
+        intQueue.enqueue(2);
+        intQueue.enqueue(3);
+        System.out.println("Dequeued from intQueue: " + intQueue.dequeue());
+
+      
+        LinkedListQueue<Double> doubleQueue = new LinkedListQueue<>();
+        doubleQueue.enqueue(1.1);
+        doubleQueue.enqueue(2.2);
+        doubleQueue.enqueue(3.3);
+        System.out.println("Dequeued from doubleQueue: " + doubleQueue.dequeue());
+
+    
+        LinkedListQueue<String> stringQueue = new LinkedListQueue<>();
+        stringQueue.enqueue("Hello");
+        stringQueue.enqueue("World");
+        stringQueue.enqueue("!");
+        System.out.println("Dequeued from stringQueue: " + stringQueue.dequeue());
+    }
+}
+
+
+stack array collection
+
+
+import java.util.*;
+
+public class StackArrayColl {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+		int ch,ele;
+        GenericStack<Integer> st = new GenericStack<>();
+        do{
+			System.out.printf("1.PUSH\n2.POP\n3.TOP\n4.DISPLAY\n5.EXIT\nEnter choice :");
+			ch=sc.nextInt();
+			switch(ch){
+				case 1:
+						System.out.println("Enter element : ");
+						ele=sc.nextInt();
+						st.push(ele);
+					break;
+				case 2:if(st.isEmpty())
+						System.out.println("Stack is empty");
+					else{
+						ele=st.pop();
+						System.out.println("Popped element : "+ele);
+					}
+					break;
+				case 3:if(st.isEmpty())
+						System.out.println("Stack is empty");
+					else{
+						ele=st.topS();
+						System.out.println("Top element : "+ele);
+					}
+					break;
+				case 4:if(st.isEmpty())
+						System.out.println("Stack is empty");
+					else{
+						System.out.println("Stack elements : ");
+						st.display();
+					}
+					break;
+				case 5:System.exit(0);
+					break;
+				default:System.out.println("Invalid choice");
+			}
+		}while(ch!=5);
+    }
+}
+
+class GenericStack<T> {
+    private ArrayList<T> list = new ArrayList<>();
+
+    public void push(T item) {
+        list.add(item);
+    }
+
+    public T pop() {
+            return list.remove(list.size() - 1);
+    }
+
+    public T topS() {
+            return list.get(list.size() - 1);
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+    public void display() {
+        System.out.println(list);
+    }
+}
+
+stack linked list collection
+
+import java.util.*;
+
+public class StackLinkedColl {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int ch, ele;
+        GenericStack<Integer> st = new GenericStack<>();
+        
+        do {
+            System.out.printf("1.PUSH\n2.POP\n3.TOP\n4.DISPLAY\n5.EXIT\nEnter choice: ");
+            ch = sc.nextInt();
+            switch (ch) {
+                case 1:
+                    System.out.println("Enter element: ");
+                    ele = sc.nextInt();
+                    st.push(ele);
+                    break;
+                case 2:
+                    if (st.isEmpty()) {
+                        System.out.println("Stack is empty");
+                    } else {
+                        ele = st.pop();
+                        System.out.println("Popped element: " + ele);
+                    }
+                    break;
+                case 3:
+                    if (st.isEmpty()) {
+                        System.out.println("Stack is empty");
+                    } else {
+                        ele = st.top();
+                        System.out.println("Top element: " + ele);
+                    }
+                    break;
+                case 4:
+                    if (st.isEmpty()) {
+                        System.out.println("Stack is empty");
+                    } else {
+                        System.out.println("Stack elements: ");
+                        st.display();
+                    }
+                    break;
+                case 5:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        } while (ch != 5);
+    }
+}
+
+class GenericStack<T> {
+    private LinkedList<T> list = new LinkedList<>();
+
+    public void push(T item) {
+        list.addFirst(item);
+    }
+
+    public T pop() {
+        return list.removeFirst();
+    }
+
+    public T top() {
+        return list.getFirst();
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public void display() {
+        System.out.println(list);
+    }
+}
+
+queue using array collection
+
+import java.util.*;
+
+public class QueueArrayColl {
+    public static void main(String[] args) {
+        GenericQueue<Integer> q = new GenericQueue<>();
+		Scanner sc=new Scanner(System.in);
+		int n,ch,ele;
+		do{
+			System.out.printf("1.ENQUEUE\n2.DEQUEUE\n3.DISPLAY\n4.EXIT\nEnter choice:");
+			ch=sc.nextInt();
+			switch(ch){
+				case 1:
+						System.out.println("Enter element : ");
+						ele=sc.nextInt();
+						q.enqueue(ele);
+					break;
+				case 2:if(q.isEmpty())
+						System.out.println("Queue is empty");
+					else{
+						ele=q.dequeue();
+						System.out.println("Dequeued element : "+ele);
+					}
+					break;
+				case 3:if(q.isEmpty())
+						System.out.println("Queue is empty");
+					else
+						q.display();
+					break;
+				case 4:System.exit(0);
+					break;
+				default:System.out.println("Invalid choice");
+			}
+		}while(ch!=4);
+	}
+
+    }
+
+
+class GenericQueue<T> {
+    private ArrayList<T> list = new ArrayList<>();
+
+    public void enqueue(T element) {
+        list.add(element);
+    }
+
+    public T dequeue() {
+        return list.remove(0);
+    }
+
+    public T peek() {
+        return list.get(0);
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+    public void display() {
+        System.out.println(list);
+    }
+}
+
+queue using linkedlist collection
+
+import java.util.*;
+
+public class QueueLinkedColl {
+    public static void main(String[] args) {
+        GenericQueue<Integer> q = new GenericQueue<>();
+        Scanner sc = new Scanner(System.in);
+        int ch, ele;
+
+        do {
+            System.out.printf("1.ENQUEUE\n2.DEQUEUE\n3.DISPLAY\n4.EXIT\nEnter choice: ");
+            ch = sc.nextInt();
+            switch (ch) {
+                case 1:
+                    System.out.println("Enter element: ");
+                    ele = sc.nextInt();
+                    q.enqueue(ele);
+                    break;
+                case 2:
+                    if (q.isEmpty())
+                        System.out.println("Queue is empty");
+                    else {
+                        ele = q.dequeue();
+                        System.out.println("Dequeued element: " + ele);
+                    }
+                    break;
+                case 3:
+                    if (q.isEmpty())
+                        System.out.println("Queue is empty");
+                    else
+                        q.display();
+                    break;
+                case 4:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        } while (ch != 4);
+    }
+}
+
+class GenericQueue<T> {
+    private LinkedList<T> list = new LinkedList<>();
+
+    public void enqueue(T element) {
+        list.addLast(element);
+    }
+
+    public T dequeue() {
+        return list.removeFirst();
+    }
+
+    public T peek() {
+        return list.getFirst();
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public void display() {
+        System.out.println(list);
+    }
+}
+
+hashset collection
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+       
+        HashSet<String> hashSet = new HashSet<>();
+
+       
+        hashSet.add("Apple");
+        hashSet.add("Banana");
+        hashSet.add("Cherry");
+        hashSet.add("Date");
+        hashSet.add("Elderberry");
+
+      
+        System.out.println("HashSet: " + hashSet);
+
+        
+        String elementToCheck = "Banana";
+        if (hashSet.contains(elementToCheck)) {
+            System.out.println(elementToCheck + " is in the HashSet.");
+        } else {
+            System.out.println(elementToCheck + " is not in the HashSet.");
+        }
+
+      
+        hashSet.remove("Date");
+        System.out.println("HashSet after removing 'Date': " + hashSet);
+
+        
+        System.out.println("Iterating over the HashSet:");
+        Iterator<String> iterator = hashSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        
+        hashSet.clear();
+        System.out.println("HashSet after clearing: " + hashSet);
+
+        
+        if (hashSet.isEmpty()) {
+            System.out.println("HashSet is empty.");
+        } else {
+            System.out.println("HashSet is not empty.");
+        }
+    }
+}
+
+
+linkedhash set collection
+
+import java.util.LinkedHashSet;
+import java.util.Iterator;
+
+public class LinkedHashSetExample {
+    public static void main(String[] args) {
+        
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+
+        
+        linkedHashSet.add("Banana");
+        linkedHashSet.add("Apple");
+        linkedHashSet.add("Cherry");
+        linkedHashSet.add("Date");
+        linkedHashSet.add("Elderberry");
+
+      
+        System.out.println("LinkedHashSet: " + linkedHashSet);
+
+       
+        String elementToCheck = "Cherry";
+        if (linkedHashSet.contains(elementToCheck)) {
+            System.out.println(elementToCheck + " is in the LinkedHashSet.");
+        } else {
+            System.out.println(elementToCheck + " is not in the LinkedHashSet.");
+        }
+
+        
+        linkedHashSet.remove("Date");
+        System.out.println("LinkedHashSet after removing 'Date': " + linkedHashSet);
+
+      
+        System.out.println("Iterating over the LinkedHashSet:");
+        Iterator<String> iterator = linkedHashSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+       
+        linkedHashSet.clear();
+        System.out.println("LinkedHashSet after clearing: " + linkedHashSet);
+
+      
+        if (linkedHashSet.isEmpty()) {
+            System.out.println("LinkedHashSet is empty.");
+        } else {
+            System.out.println("LinkedHashSet is not empty.");
+        }
+    }
+}
+
+treeset collection
+
+import java.util.TreeSet;
+import java.util.Iterator;
+
+public class TreeSetExample {
+    public static void main(String[] args) {
+     
+        TreeSet<String> treeSet = new TreeSet<>();
+
+     
+        treeSet.add("Banana");
+        treeSet.add("Apple");
+        treeSet.add("Cherry");
+        treeSet.add("Date");
+        treeSet.add("Elderberry");
+
+     
+        System.out.println("TreeSet: " + treeSet);
+
+       
+        String elementToCheck = "Cherry";
+        if (treeSet.contains(elementToCheck)) {
+            System.out.println(elementToCheck + " is in the TreeSet.");
+        } else {
+            System.out.println(elementToCheck + " is not in the TreeSet.");
+        }
+
+       
+        treeSet.remove("Date");
+        System.out.println("TreeSet after removing 'Date': " + treeSet);
+
+      
+        System.out.println("Iterating over the TreeSet:");
+        Iterator<String> iterator = treeSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+       
+        TreeSet<String> subset = new TreeSet<>(treeSet.subSet("Banana", "Elderberry"));
+        System.out.println("Subset from 'Banana' to 'Elderberry' (exclusive): " + subset);
+
+        
+        String firstElement = treeSet.first();
+        String lastElement = treeSet.last();
+        System.out.println("First element: " + firstElement);
+        System.out.println("Last element: " + lastElement);
+
+      
+        treeSet.clear();
+        System.out.println("TreeSet after clearing: " + treeSet);
+
+      
+        if (treeSet.isEmpty()) {
+            System.out.println("TreeSet is empty.");
+        } else {
+            System.out.println("TreeSet is not empty.");
+        }
+    }
+}
+
+
+hashmap collection
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+       
+        HashMap<String, Integer> hashMap = new HashMap<>();
+
+      
+        hashMap.put("Apple", 1);
+        hashMap.put("Banana", 2);
+        hashMap.put("Cherry", 3);
+        hashMap.put("Date", 4);
+        hashMap.put("Elderberry", 5);
+
+      
+        System.out.println("HashMap: " + hashMap);
+
+        
+        String keyToCheck = "Cherry";
+        if (hashMap.containsKey(keyToCheck)) {
+            System.out.println(keyToCheck + " is in the HashMap.");
+        } else {
+            System.out.println(keyToCheck + " is not in the HashMap.");
+        }
+
+       
+        int value = hashMap.get("Banana");
+        System.out.println("Value associated with 'Banana': " + value);
+
+       
+        hashMap.remove("Date");
+        System.out.println("HashMap after removing 'Date': " + hashMap);
+
+      
+        System.out.println("Iterating over the HashMap:");
+        Iterator<Map.Entry<String, Integer>> iterator = hashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Integer> entry = iterator.next();
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+       
+        System.out.println("Iterating using for-each loop:");
+        for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+       
+        hashMap.clear();
+        System.out.println("HashMap after clearing: " + hashMap);
+
+      
+        if (hashMap.isEmpty()) {
+            System.out.println("HashMap is empty.");
+        } else {
+            System.out.println("HashMap is not empty.");
+        }
+    }
+}
+
+
+linkedhashmap collection
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class LinkedHashMapExample {
+    public static void main(String[] args) {
+     
+        LinkedHashMap<String, Integer> linkedHashMap = new LinkedHashMap<>();
+
+      
+        linkedHashMap.put("Apple", 1);
+        linkedHashMap.put("Banana", 2);
+        linkedHashMap.put("Cherry", 3);
+        linkedHashMap.put("Date", 4);
+        linkedHashMap.put("Elderberry", 5);
+
+     
+        System.out.println("LinkedHashMap: " + linkedHashMap);
+
+    
+        String keyToCheck = "Cherry";
+        if (linkedHashMap.containsKey(keyToCheck)) {
+            System.out.println(keyToCheck + " is in the LinkedHashMap.");
+        } else {
+            System.out.println(keyToCheck + " is not in the LinkedHashMap.");
+        }
+
+      
+        int value = linkedHashMap.get("Banana");
+        System.out.println("Value associated with 'Banana': " + value);
+
+        
+        linkedHashMap.remove("Date");
+        System.out.println("LinkedHashMap after removing 'Date': " + linkedHashMap);
+
+      
+        System.out.println("Iterating over the LinkedHashMap:");
+        for (Map.Entry<String, Integer> entry : linkedHashMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+        
+        System.out.println("Iterating using for-each loop:");
+        for (Map.Entry<String, Integer> entry : linkedHashMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+        
+        linkedHashMap.clear();
+        System.out.println("LinkedHashMap after clearing: " + linkedHashMap);
+
+   
+        if (linkedHashMap.isEmpty()) {
+            System.out.println("LinkedHashMap is empty.");
+        } else {
+            System.out.println("LinkedHashMap is not empty.");
+        }
+    }
+}
+
+
+treemap
+
+import java.util.TreeMap;
+import java.util.Map;
+
+public class TreeMapExample {
+    public static void main(String[] args) {
+    
+        TreeMap<String, Integer> treeMap = new TreeMap<>();
+
+       
+        treeMap.put("Apple", 1);
+        treeMap.put("Banana", 2);
+        treeMap.put("Cherry", 3);
+        treeMap.put("Date", 4);
+        treeMap.put("Elderberry", 5);
+
+       
+        System.out.println("TreeMap: " + treeMap);
+
+    
+        String keyToCheck = "Cherry";
+        if (treeMap.containsKey(keyToCheck)) {
+            System.out.println(keyToCheck + " is in the TreeMap.");
+        } else {
+            System.out.println(keyToCheck + " is not in the TreeMap.");
+        }
+
+     
+        int value = treeMap.get("Banana");
+        System.out.println("Value associated with 'Banana': " + value);
+
+      
+        treeMap.remove("Date");
+        System.out.println("TreeMap after removing 'Date': " + treeMap);
+
+    
+        System.out.println("Iterating over the TreeMap:");
+        for (Map.Entry<String, Integer> entry : treeMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+  
+        System.out.println("Iterating using for-each loop:");
+        for (Map.Entry<String, Integer> entry : treeMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+      
+        treeMap.clear();
+        System.out.println("TreeMap after clearing: " + treeMap);
+
+       
+        if (treeMap.isEmpty()) {
+            System.out.println("TreeMap is empty.");
+        } else {
+            System.out.println("TreeMap is not empty.");
+        }
+    }
+}
+
+
+sorted
+
+class Pair<K extends Comparable<K>,V>{
+    K key;
+    V value;
+    Pair(){}
+    Pair(K key,V value){
+        this.key=key;
+        this.value=value;
+    }
+    public String toString(){
+        return "Key: "+key+" Value: "+value;
+    }
+}
+class PairNode<K extends Comparable<K>,V>{
+    Pair<K,V> data;
+    PairNode<K,V> next;
+    PairNode(Pair<K,V> pair,PairNode<K,V> next){
+        this.data=pair;
+        this.next=next;
+    }
+}
+class SortedChain<K extends Comparable <K>,V>{
+    PairNode <K,V> head;
+    int dsize;
+    public boolean isEmpty(){
+        return head==null;
+    }
+    public int size(){
+        return dsize;
+    }
+    public void insert(Pair<K,V> p){
+        PairNode<K,V> npNode= new PairNode<K,V>(p,null);
+        PairNode<K,V> temp,prev;
+        if(isEmpty())
+            head=npNode;
+        else if(p.key.compareTo(head.data.key)<0){
+            npNode.next=head;
+            head=npNode;
+        }
+        else{
+            temp=head;
+            prev=null;
+            while(temp!=null && p.key.compareTo(temp.data.key)>0){
+                prev=temp;
+                temp=temp.next;
+            }
+            npNode.next=temp;
+            prev.next=npNode;
+        }
+        dsize++;
+    }
+    public void display(){
+        PairNode<K,V> temp;
+        if(isEmpty()){
+            System.out.println("Empty Dictionary");
+            return;
+        }
+        else{
+            temp=head;
+            while(temp!=null){
+                System.out.println(temp.data);
+                temp=temp.next;
+            }
+        }
+    }
+    public Pair<K,V> find(K fkey){
+        Pair<K,V> T=null;
+        PairNode<K,V> temp=head;
+        while(temp!=null && fkey.compareTo(temp.data.key)>0)
+            temp=temp.next;
+        if(temp!=null){
+                if(temp.data.key.equals(fkey))
+                    T=temp.data;
+        }
+        return T;
+    }
+    public void delete(K dkey){
+        PairNode<K,V> temp=head;
+        PairNode<K,V> prev=null;
+        if(isEmpty()){
+            System.out.println("Empty dict");
+            return;
+        }
+        while(temp!=null && dkey.compareTo(temp.data.key)>0){
+            prev=temp;
+            temp=temp.next;
+        }
+        if(temp!=null && temp.data.key.equals(dkey)){
+            System.out.println("deleted key: "+temp.data);
+            if(temp==head)
+                head=head.next;
+            else
+                prev.next=temp.next;
+            dsize--;
+        }
+        else{
+            System.out.println("element not found");
+            temp.next=null;
+            temp=null;
+            prev=null;
+        }
+
+    }
+}
+public class Sorted{
+    public static void main(String[] args) {
+        SortedChain<Integer,String> s=new SortedChain<Integer,String>();
+        Pair<Integer,String> p1=new Pair<Integer,String>(4,"Apple");
+        Pair<Integer,String> p5=new Pair<Integer,String>(3,"Orange");
+        Pair<Integer,String> p2=new Pair<Integer,String>(1,"Grapes");
+        Pair<Integer,String> p3=new Pair<Integer,String>(2,"Banana");
+        s.insert(p1);s.insert(p2);s.insert(p3);s.insert(p5);
+        System.out.println("Sorted Chain Dictionary :");
+        s.display();
+        s.delete(1);
+        System.out.println("After removing  :");
+        s.display();
+        System.out.println("Finfing 2 - "+ s.find(2));
+
+    }
+}
+
+separete
+
+class Pair<K extends Comparable<K>, V> {
+    K key;
+    V val;
+
+    Pair(K key, V val) {
+        this.key = key;
+        this.val = val;
+    }
+
+    public String toString() {
+        return key + "-" + val;
+    }
+}
+
+class PairNode<K extends Comparable<K>, V> {
+    Pair<K, V> data;
+    PairNode<K, V> next;
+
+    PairNode(Pair<K, V> data, PairNode<K, V> next) {
+        this.data = data;
+        this.next = next;
+    }
+}
+
+class SeperateChain<K extends Comparable<K>, V> {
+    PairNode<K, V>[] sc;
+    int size, no;
+
+    SeperateChain(int n) {
+        size = n;
+        no = 0;
+        sc = new PairNode[n];
+        for (int i = 0; i < n; i++)
+            sc[i] = null;
+    }
+
+    int hash(K key) {
+        return Math.abs(key.hashCode() % size);
+    }
+
+    boolean isEmpty() {
+        return no == 0;
+    }
+
+    void insert(Pair<K, V> d) {
+        int home = hash(d.key);
+        PairNode<K, V> newNode = new PairNode<>(d, null);
+        if (sc[home] == null)
+            sc[home] = newNode;
+        else {
+            PairNode<K, V> temp = sc[home];
+            while (temp.next != null)
+                temp = temp.next;
+            temp.next = newNode;
+        }
+        no++;
+    }
+
+    void display() {
+        if (isEmpty())
+            System.out.println("empty");
+        else {
+            System.out.println("Entries: ");
+            for (int i = 0; i < size; i++) {
+                if (sc[i] == null)
+                    System.out.println(i+": NULL");
+                else {
+                    PairNode<K, V> temp = sc[i];
+                    System.out.print(i + ": ");
+                    while (temp != null) {
+                        System.out.print(temp.data + " ");
+                        temp = temp.next;
+                    }
+                    System.out.println();
+                }
+            }
+        }
+    }
+
+    void delete(K dkey) {
+        if (isEmpty()) {
+            System.err.println("empty");
+            return;
+        }
+        int home = hash(dkey);
+        PairNode<K, V> curr = sc[home], prev = null;
+        while (curr != null && !curr.data.key.equals(dkey)) {
+            prev = curr;
+            curr = curr.next;
+        }
+        if (curr != null) {
+            if (curr == sc[home])
+                sc[home] = curr.next;
+            else
+                prev.next = curr.next;
+            System.err.println("Deleted: " + curr.data);
+            no--;
+        } else
+            System.err.println("Not found");
+    }
+
+    void find(K fkey) {
+        if (isEmpty()) {
+            System.err.println("Empty");
+            return;
+        }
+        int home = hash(fkey);
+        PairNode<K, V> curr = sc[home];
+        while (curr != null && !curr.data.key.equals(fkey))
+            curr = curr.next;
+        if (curr != null)
+            System.err.println("found: " + curr.data);
+        else
+            System.err.println("not found");
+    }
+}
+
+public class SC {
+    public static void main(String[] args) {
+        SeperateChain<Integer, String> sp = new SeperateChain<>(5);
+        Pair<Integer, String> p1, p2, p3, p4;
+        p1 = new Pair<>(3, "Java");
+        p2 = new Pair<>(6, "C");
+        p3 = new Pair<>(23, "Python");
+        p4 = new Pair<>(19, "HTML");
+        sp.insert(p1);
+        sp.insert(p2);
+        sp.insert(p3);
+        sp.insert(p4);
+        sp.display();
+        sp.delete(3);
+        sp.find(19);
+    }
+}
+
+linear
+
+
+class pair<k, v> {
+    k key;
+    v value;
+
+    pair(k key, v value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String toString() {
+        return this.key + " " + this.value;
+    }
+}
+
+class lp<k, v> {
+    pair<k, v> htable[];
+    boolean bit[];
+    int size;
+
+    lp(int n) {
+        this.size = n;
+        htable = new pair[size];
+        bit = new boolean[size];
+        for (int i = 0; i < size; i++) {
+            htable[i] = null;
+            bit[i] = true;
+        }
+    }
+
+    void insert(pair<k, v> entry) {
+        int home = hash(entry.key);
+        int i = probe(home);
+        if (i != -1) {
+            htable[i] = entry;
+            bit[i] = false;
+        } else {
+            System.out.println("hash table is full, insertion not possible");
+        }
+    }
+
+    int hash(k key) {
+        return key.hashCode() % size;
+    }
+
+    int probe(int home) {
+        int i = home;
+        do {
+            if (htable[i] == null)
+                return i;
+            i = (i + 1) % size;
+        } while (i != home);
+        return -1;
+    }
+
+    void display() {
+        if (isEmpty())
+            System.out.println("hash table is empty");
+        else {
+            System.out.println("hash table entries are:");
+            for (int i = 0; i < size; i++) {
+                if (htable[i] == null)
+                    System.out.println(i + " null");
+                else
+                    System.out.println(i + " " + htable[i]);
+            }
+        }
+    }
+
+    boolean isEmpty() {
+        boolean f = true;
+        for (int i = 0; i < size; i++) {
+            if (htable[i] == null)
+                f = false;
+        }
+        return f;
+    }
+
+    void delete(k key) {
+        int home = hash(key);
+        int i = home;
+        do {
+            if (htable[i] != null && htable[i].key.equals(key)) {
+                System.out.println("delted key:" + htable[i]);
+                htable[i] = null;
+                return;
+            } else {
+                i = (i + 1) % size;
+            }
+        } while (bit[i] != true && i != home);
+        System.out.println("key not found");
+    }
+
+    void find(k key) {
+        int home = hash(key);
+        int i = home;
+        do {
+            if (htable[i] != null && htable[i].key.equals(key)) {
+                System.out.println("found at:" + i);
+                return;
+            } else
+                i = (i + 1) % size;
+        } while (bit[i] != true && i != home);
+        System.out.println("not found");
+    }
+}
+
+public class linearProbing {
+    public static void main(String[] args) {
+        lp<Integer, String> a = new lp<>(5);
+        pair<Integer, String> p1, p2, p3, p4;
+        p1 = new pair<>(2, "apple");
+        p2 = new pair<>(6, "banana");
+        p3 = new pair<>(7, "grapes");
+        p4 = new pair<>(12, "pineapple");
+        a.insert(p1);
+        a.insert(p2);
+        a.insert(p3);
+        a.insert(p4);
+        a.display();
+        a.delete(6);
+        a.find(2);
+    }
+}
+
+BST
+
+
+import java.util.*;
+class Pair<K extends Comparable<K>,V>
+{
+	K key;
+	V value;
+	Pair(K key, V value){
+		this.key=key;
+		this.value=value;
+	}
+	public String toString(){
+		return "Key:"+key +" Value:"+ value;
+	}
+}
+class TreeNode<K extends Comparable<K>,V>
+{
+	Pair<K,V> data;
+	TreeNode<K,V> lchild;
+	TreeNode<K,V> rchild;
+	TreeNode(Pair<K,V> P, TreeNode<K,V> lchild, TreeNode<K,V> rchild) {
+		this.data=P;
+		this.lchild=lchild;
+		this.rchild=rchild;
+	}
+}
+class BSTDictionary<K extends Comparable<K>, V> {
+	TreeNode<K,V> Root;
+	int dsize;
+	boolean isEmpty(){
+		return Root==null;
+	}
+	int size(){
+		return dsize;
+	}
+	void insert(Pair<K,V> P){
+		TreeNode<K,V> nn=new TreeNode<K,V>(P,null,null);
+		TreeNode<K,V> Parent=null;
+		TreeNode<K,V> Child;
+		if(isEmpty())
+			Root=nn;
+		else{ 
+			Child=Root;
+			while(Child!=null){
+				Parent=Child;
+				if(P.key.compareTo(Child.data.key)>0)
+					Child=Child.rchild;
+				else
+					Child=Child.lchild;
+			}//while
+			if(P.key.compareTo(Parent.data.key)>0)
+				Parent.rchild=nn;
+			else
+				Parent.lchild=nn;
+		}
+		dsize++;
+	}
+	Pair<K,V> find(K key){
+		TreeNode<K,V> Temp=Root;
+		while(Temp!=null&&!key.equals(Temp.data.key)){
+			if(key.compareTo(Temp.data.key)>0)
+				Temp=Temp.rchild;
+			else if(key.compareTo(Temp.data.key)<0)
+				Temp=Temp.lchild;
+		}
+		if(Temp!=null)
+			return Temp.data;
+		else
+			return null;
+	}
+	void display(){
+		if(isEmpty()){
+		System.out.println("Tree is empty");
+	return;
+		}
+	System.out.println("MENU");
+	System.out.println("1. INORDER TRAVERSAL");
+	System.out.println("2. PREORDER TRAVERSAL");
+	System.out.println("3. POSTORDER");
+	System.out.println("Enter Choice:");
+	Scanner sc=new Scanner(System.in);
+	int choice=sc.nextInt();
+	switch(choice){
+		case 1: inOrder(Root);
+			break;
+		case 2:preorder(Root);
+			break;
+		case 3:postorder(Root);
+			break;
+	}
+	}
+	void inorder( TreeNode<K,V> Root){
+		if(Root!=null){
+			inorder(Root.lchild);
+			System.out.println(Root.data);
+			inorder(Root.rchild);
+		}
+	}
+	void inOrder( TreeNode<K,V> Root){
+		if(Root!=null){	
+			inorder(Root.lchild);
+			System.out.println(Root.data);
+			inorder(Root.rchild);
+		}
+	}
+	void preorder( TreeNode<K,V> Root){
+		if(Root!=null){
+			System.out.println(Root.data);
+			inorder(Root.lchild);
+			inorder(Root.rchild);
+		}
+	}
+	void postorder( TreeNode<K,V> Root){
+		if(Root!=null){
+			inorder(Root.lchild);
+			inorder(Root.rchild);
+			System.out.println(Root.data);
+		}
+	}
+	void delete(K key){
+		TreeNode<K,V> Parent=null;
+		TreeNode<K,V> Child;
+		TreeNode<K,V> ps;
+		TreeNode<K,V> s;
+		if(isEmpty()){
+			System.out.println("Tree is empty");
+		return;
+		}
+		else
+		{ 
+			Child=Root;
+			while(Child!=null && !key.equals(Child.data.key)){
+			Parent=Child;
+			if(key.compareTo(Child.data.key)>0)
+				Child=Child.rchild;
+			else if(key.compareTo(Child.data.key)<0)
+				Child=Child.lchild;
+			}//while
+			if(Child==null){
+				System.out.println("Entry not found");
+			return;
+		}
+		if(Child.lchild!=null && Child.rchild!=null){
+			ps=Child;
+			s=Child.lchild;
+			while(s.rchild!=null){
+				ps=s;
+				s=s.rchild;
+			}
+			Child.data=s.data;
+			Child=s;
+			Parent=ps;
+		}
+		TreeNode<K,V> c;
+		if(Child.lchild==null)
+			c=Child.rchild;
+		else
+			c=Child.lchild;
+		if(Child==Root)
+			Root=c;
+		else if(Child==Parent.rchild)
+			Parent.rchild=c;
+		else
+			Parent.lchild=c;
+	}
+    }
+}
+class BSTMain{
+	public static void main(String args[]){
+	      BSTDictionary<Integer, String> bst=new BSTDictionary<Integer,String>();
+		Scanner sc=new Scanner(System.in);
+		int choice;
+		Integer key;
+		String value;
+		Pair<Integer,String> P;
+	do{
+		System.out.println("BST DICTIONARY OPERATIONS");
+		System.out.println("1.Insert");
+		System.out.println("2.Delete");
+		System.out.println("3.Find");
+		System.out.println("4.Display");
+		System.out.println("Enter an operation you like to perform");
+		choice=sc.nextInt();
+		switch (choice){
+			case 1 :
+				System.out.println("Enter the key:");
+				key=sc.nextInt();
+				sc.nextLine();
+				System.out.println("Enter the value:");
+				value=sc.nextLine();
+				P=new Pair<Integer,String>(key,value);
+				bst.insert(P);
+				break;
+			case 2:
+				System.out.println("Enter the key:");
+				key=sc.nextInt();
+				bst.delete(key);
+				break;
+			case 3:
+				System.out.println("Enter the key:");
+				key=sc.nextInt();
+				P=bst.find(key);
+				if(P==null)
+					System.out.println("Entry not found");
+				else
+					System.out.println("Entry found:Key :"+ P.key + " Value :"+P.value);
+				break;
+			case 4:bst.display();
+				break;
+			case 5:
+				System.exit(0);
+			}
+		}while(true);
+	}
+}
+
+AVL
+
+import java.util.*;
+
+class AVLTree<T extends Comparable<T>> {
+
+    class Node {
+        T key;
+        int height;
+        Node left, right;
+
+        Node(T d) {
+            key = d;
+            height = 1;
+        }
+    }
+
+    AVLTree() {
+        root = null;
+    }
+
+    Node root;
+
+    boolean isEmpty() {
+        return root == null;
+    }
+
+    int height(Node n) {
+        if (n == null)
+            return 0;
+        return n.height;
+    }
+
+    int max(int a, int b) {
+        return (a > b) ? a : b;
+    }
+
+    Node rightRotate(Node P) // LL Rotation
+    {
+        Node A = P.left;
+        P.left = A.right;
+        A.right = P;
+
+        P.height = max(height(P.left), height(P.right)) + 1;
+        A.height = max(height(A.left), height(A.right)) + 1;
+
+        return A;
+    }
+
+    Node leftRotate(Node P) // RR Rotation
+    {
+        Node B = P.right;
+        P.right = B.left;
+        B.left = P;
+
+        P.height = max(height(P.left), height(P.right)) + 1;
+        B.height = max(height(B.left), height(B.right)) + 1;
+
+        return B;
+    }
+
+    void insert(T key) {
+        root = insert(root, key);
+    }
+
+    private Node insert(Node node, T key) {
+        if (node == null)
+            return new Node(key);
+
+        if (key.compareTo(node.key) < 0)
+            node.left = insert(node.left, key);
+        else
+            node.right = insert(node.right, key);
+
+        node.height = 1 + max(height(node.left), height(node.right));
+
+        int bal = getBalance(node);
+
+        if (bal > 1 && key.compareTo(node.left.key) < 0)
+            return rightRotate(node); // LL Rotation
+        if (bal < -1 && key.compareTo(node.right.key) > 0)
+            return leftRotate(node); // RR Rotation
+        if (bal > 1 && key.compareTo(node.left.key) > 0) {
+            node.left = leftRotate(node.left); // LR Rotation
+            return rightRotate(node);
+        }
+        if (bal < -1 && key.compareTo(node.right.key) < 0) {
+            node.right = rightRotate(node.right); // RL Rotation
+            return leftRotate(node);
+        }
+        return node;
+    }
+
+    private int getBalance(Node node) {
+        if (node == null)
+            return 0;
+        return height(node.left) - height(node.right);
+    }
+
+    void display() {
+        if (root == null)
+            System.out.println("There are no elements in the AVL tree.");
+        else {
+            System.out.print("The elements in the tree are ");
+            inorder(root);
+        }
+    }
+
+    void inorder(Node t) {
+        if (t != null) {
+            inorder(t.left);
+            System.out.print(t.key + " ");
+            inorder(t.right);
+        }
+    }
+
+    boolean search(T key) {
+        Node t = root;
+        while (t != null) {
+            if (key.equals(t.key))
+                return true;
+            if (key.compareTo(t.key) < 0)
+                t = t.left;
+            else
+                t = t.right;
+        }
+        return false;
+    }
+
+    Node minValueNode(Node node) {
+        Node current = node;
+
+        /* loop down to find the leftmost leaf */
+        while (current.left != null)
+            current = current.left;
+
+        return current;
+    }
+
+    Node delete(Node root, T key) {
+        if (root == null) {
+            System.out.println("Data to be deleted, not found");
+            return root;
+        }
+
+        if (key.compareTo(root.key) < 0)
+            root.left = delete(root.left, key);
+
+        else if (key.compareTo(root.key) > 0)
+            root.right = delete(root.right, key);
+
+        else {
+            if ((root.left == null) || (root.right == null)) {
+                Node temp = null;
+                if (temp == root.left)
+                    temp = root.right;
+                else
+                    temp = root.left;
+
+                if (temp == null) {
+                    temp = root;
+                    root = null;
+                } else
+                    root = temp;
+            } else {
+                Node temp = minValueNode(root.right);
+                root.key = temp.key;
+                root.right = delete(root.right, temp.key);
+            }
+        }
+
+        if (root == null)
+            return root;
+
+        root.height = max(height(root.left), height(root.right)) + 1;
+
+        int balance = getBalance(root);
+
+        if (balance > 1 && getBalance(root.left) >= 0)
+            return rightRotate(root);
+
+        if (balance > 1 && getBalance(root.left) < 0) {
+            root.left = leftRotate(root.left);
+            return rightRotate(root);
+        }
+
+        if (balance < -1 && getBalance(root.right) <= 0)
+            return leftRotate(root);
+
+        if (balance < -1 && getBalance(root.right) > 0) {
+            root.right = rightRotate(root.right);
+            return leftRotate(root);
+        }
+
+        return root;
+    }
+
+    Node delete(T key) {
+
+        if (root.left == null && root.right == null) {
+            root = null;
+            return root;
+        }
+        Node temp = delete(root, key);
+        return temp;
+    }
+
+    boolean delete() {
+        if (root == null)
+            return false;
+        else {
+            return true;
+        }
+    }
+}
+
+public class AVL {
+    public static void main(String[] args) {
+        // Fill your code
+        Scanner sc = new Scanner(System.in);
+        System.out.println("AVL Tree Implementation.\n");
+        System.out.println("Enter the data type of the data to be added");
+        System.out.println("1.Integer\n2.Double\n");
+        int n = sc.nextInt();
+        String s = "";
+        System.out.println("Choice 1: Insert an element.\nChoice 2: Delete an element.\nChoice 3: Display.\n");
+        if (n == 1) {
+            AVLTree<Integer> a = new AVLTree<>();
+            while (true) {
+                System.out.println("Enter your choice :");
+                switch (sc.nextInt()) {
+                    case 1:
+                        System.out.println("Enter the element to be inserted :");
+                        a.insert(sc.nextInt());
+
+                        break;
+                    case 2:
+                        boolean x = a.delete();
+                        if (x == false)
+                            System.out.println("Tree is empty");
+                        else {
+                            System.out.println("Enter the element to be deleted :");
+                            a.delete(sc.nextInt());
+
+                        }
+                        break;
+
+                    case 3:
+                        a.display();
+                        System.out.println();
+                        break;
+                    default:
+                        System.exit(0);
+                }
+            }
+        }
+        if (n == 2) {
+            AVLTree<Double> a = new AVLTree<>();
+            while (true) {
+                System.out.println("Enter your choice :");
+                switch (sc.nextInt()) {
+                    case 1:
+                        System.out.println("Enter the element to be inserted :");
+                        a.insert(sc.nextDouble());
+
+                        break;
+                    case 2:
+                        boolean x = a.delete();
+                        if (x == false)
+                            System.out.println("Tree is empty");
+                        else {
+                            System.out.println("Enter the element to be deleted :");
+                            a.delete(sc.nextDouble());
+
+                        }
+                        break;
+
+                    case 3:
+                        a.display();
+                        System.out.println();
+                        break;
+                    default:
+                        System.exit(0);
+                }
+            }
+        }
+    }
+
+}
+
+priority queue heaptree
+
+import java.util.*;
+
+class PriorityQueue<T extends Comparable<T>> {
+    T heap[];
+    int noelements;
+
+    PriorityQueue(T heap[]) {
+        this.heap = heap;
+        noelements = 0;
+    }
+
+    void enqueue(T newele) {
+        noelements++;
+        int newelepos = noelements;
+        while (newelepos > 1 && heap[newelepos / 2].compareTo(newele) < 0) {
+            heap[newelepos] = heap[newelepos / 2];
+            newelepos = newelepos / 2;
+        }
+        heap[newelepos] = newele;
+    }
+
+    void dequeue() {
+        T lastele = heap[noelements--];
+        int parent = 1;
+        int child = 2;
+        while (child <= noelements) {
+            if (heap[child].compareTo(heap[child + 1]) < 0)
+                child++;
+            if (heap[child].compareTo(lastele) > 0) {
+                heap[parent] = heap[child];
+                parent = child;
+                child = child * 2;
+
+            } else
+                break;
+        }
+        heap[parent] = lastele;
+    }
+
+    void display() {
+        for (int i = 1; i <= noelements; i++) {
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
+
+    void topele() {
+        if (noelements == 0) {
+            System.out.println("Priority queue is empty");
+            return;
+        }
+        System.out.print("Top element is " + heap[1]);
+
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the size of array");
+        int n = sc.nextInt();
+        n = n + 1;
+        Integer A[] = new Integer[n];
+        PriorityQueue<Integer> PQ = new PriorityQueue<Integer>(A);
+        System.out.println("1.insert \n 2.delete\n3.Top element\n4.display");
+        System.out.println("4.exit");
+        while (true) {
+            System.out.println("enter your choice");
+            ;
+            int ch = sc.nextInt();
+            switch (ch) {
+                case 1:
+                    System.out.println("enter element");
+                    PQ.enqueue(sc.nextInt());
+                    break;
+                case 2:
+                    PQ.dequeue();
+                    break;
+
+                case 3:
+                    PQ.topele();
+                    break;
+                case 4:
+                    PQ.display();
+                    break;
+                case 5:
+                    System.exit(0);
+            }
+        }
+    }
+}
+
+heap sort
+
+import java.util.ArrayList;
+
+class HeapSort<T extends Comparable<T>> {
+  ArrayList<T> Arr;
+  int n;
+  T temp;
+
+  HeapSort(T[] A, int s) {
+    Arr = new ArrayList(s + 1);
+    Arr.add(0, null);
+    n = s;
+   
+    for (int i = 0; i < n; i++)
+      Arr.add(i + 1, A[i]);
+  }
+
+  void hsort() {
+    heapInitialize();
+    heapExchange_Heapify();
+    display();
+  }
+
+  void heapInitialize() {
+    for (int I = n / 2; I >= 1; I--) {
+      heapify(Arr, I, n);
+    }
+  }
+
+  void heapExchange_Heapify() {
+    for (int lastelepos = n; lastelepos > 1; lastelepos--) {
+    
+      temp = Arr.get(1);
+      Arr.set(1, Arr.get(lastelepos));
+      Arr.set(lastelepos, temp);
+  
+      heapify(Arr, 1, lastelepos - 1);
+    } 
+  }
+
+  void heapify(ArrayList<T> Arr, int rootpos, int m) {
+    temp = Arr.get(rootpos);
+    int parent = rootpos;
+    int child = parent * 2;
+    while (child <= m) {
+      if (child < m && Arr.get(child).compareTo(Arr.get(child + 1)) < 0)
+        child++;
+      if (Arr.get(child).compareTo(temp) > 0) {
+      
+        Arr.set(parent, Arr.get(child));
+        parent = child;
+        child = child * 2;
+
+      } else
+        break;
+    } 
+    Arr.set(parent, temp);
+
+  }
+
+  void display() {
+    for (int i = 1; i <= n; i++)
+      System.out.print(Arr.get(i) + "   ");
+  }
+
+  public static void main(String[] args) {
+    Integer[] A = new Integer[] { 4, 7, 8, 2, 15, 9, 20, 25, 17, 11 };
+    HeapSort<Integer> hs = new HeapSort<Integer>(A, 10);
+    hs.hsort();
+  }
+}
+
+
+
+		
